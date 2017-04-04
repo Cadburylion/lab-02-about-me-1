@@ -1,0 +1,15 @@
+
+* { /* Make everything the same as default, I will change it below */
+  font-weight: normal;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  display: block;
+  font-size: 20px;
+}
+title {
+  display: none;
+}
+body {
+  background-color: lightblue;
+}
