@@ -1,4 +1,3 @@
-
 * { /* Make everything the same as default (for cross-browser consistency), I will change it below */
   font-weight: normal;
   list-style: none;
@@ -11,7 +10,7 @@ title {
   display: none;
 }
 body {
-  background-color: lightblue;
+  background-color: gray;
 }
 h1 {
   font-size: 60px;
