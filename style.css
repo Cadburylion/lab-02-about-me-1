@@ -56,8 +56,6 @@ p {
 }
 ol li {
   width: 90%;
-  display: inline-block;
-  margin-left: 50px;
   text-align: left;
   list-style: circle;
   display: list-item;

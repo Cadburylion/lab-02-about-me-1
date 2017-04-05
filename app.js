@@ -1,43 +1,57 @@
 'use strict'; /* Do this for every JavaScript file for now on forever! */
 
-Class 2 lab:
+var totalCorrect = 0;
+var qArr = [prompt('Do you think that I like programming?'), prompt('Have I ever been to Mexico?'), prompt('Am I over 6\' tall?'), prompt('Do I know C++ like the back of my hand?'), prompt('Do I own two beagles?')];
+var myAnswers = ['yes', 'no', 'no', 'no', 'yes'];
 
-var q1 = prompt('Do you think that I like programming?');
-if(q1 == '') { //trim() throws error when the user presses cancel
-  q1 = 'no input supplied';
-} else if(q1 !== null) { //Empty string if they just hit OK
-  q1 = q1.trim().toLowerCase();
+for(var question = 0; question < qArr.length; question++) {
+  if(!qArr[question]) { //trim() throws error when the user presses cancel
+    qArr[question] = 'no input supplied';
+  } else if(qArr[question] !== null) { //Empty string if they just hit OK
+    qArr[question] = qArr[question].trim().toLowerCase();
+  }
+  if(qArr[question] === myAnswers[question]) {
+    totalCorrect++;
+  }
+  console.log('Question number: ' + question + '\nUser answer: ' + qArr[question] + '\nMy answer: ' + myAnswers[question] + '/' + myAnswers[question].substring(0,1) + '\nAnswered correctly: ' + ((qArr[question] == myAnswers[question]) || (qArr[question] == myAnswers[question].substring(0,1))));
 }
-console.log('User answer: ' + q1 + '\nMy answer: yes/n' + '\nAnswered correctly: ' + ((q1 == 'yes') || (q1 == 'y')));
 
-var q2 = prompt('Have I ever been to Mexico?');
-if(q2 == '') {
-  q2 = 'no input supplied';
-} else if(q2 !== null) {
-  q2 = q2.trim().toLowerCase();
-}
-console.log('User answer: ' + q2 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q2 == 'no') || (q2 == 'n')));
+var allowedTries = 4;
+var q6 = 'What number is in my head?';
+var myAns = 8;
+var running = true;
+var theirAns = '';
+var stringOfTries = '';
 
-var q3 = prompt('Am I over 6\' tall?');
-if(q3 == '') {
-  q3 = 'no input supplied';
-} else if(q3 !== null) {
-  q3 = q3.trim().toLowerCase();
-}
-console.log('User answer: ' + q3 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q3 == 'no') || (q3 == 'n')));
+for(var theirTries = 0; theirTries < allowedTries && running; theirTries++) {
+  theirAns = prompt(q6);
+  if(!theirAns) { //trim() throws error when the user presses cancel
+    theirAns = 'no input supplied';
+  } else if(theirAns !== null) { //Empty string if they just hit OK
+    theirAns = theirAns.trim().toLowerCase();
+  }
 
-var q4 = prompt('Do I know C++ like the back of my hand?');
-if(q4 == '') {
-  q4 = 'no input supplied';
-} else if(q4 !== null) {
-  q4 = q4.trim().toLowerCase();
-}
-console.log('User answer: ' + q4 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q4 == 'no') || (q4 == 'n')));
+  for(var combine = 0; combine < theirAns.length; combine++) {
+    stringOfTries += theirAns[combine] + ' ';
+  }
 
-var q5 = prompt('Do I own two beagles?');
-if(q5 == '') {
-  q5 = 'no input supplied';
-} else if(q5 !== null) {
-  q5 = q5.trim().toLowerCase();
+  if(parseInt(theirAns) === myAns) {
+    console.log('Question number: 6\nUser answer(s): ' + stringOfTries + '\nMy answer: ' + myAns + '\nAnswered correctly: ' + ((theirAns == myAns) || (theirAns == myAns)) + '\nTotal guesses: ' + (theirTries + 1));
+    running = false;
+    totalCorrect++;
+  } else if(theirTries == allowedTries - 1) {
+    alert('You ran out of tries! Too bad.');
+    console.log('Question number: 6\nUser answer(s): ' + stringOfTries + '\nMy answer: ' + myAns + '\nAnswered correctly: ' + ((theirAns == myAns) || (theirAns == myAns)) + '\nTotal guesses: ' + (theirTries + 1));
+    running = false;
+  } else if(parseInt(theirAns) === NaN) {
+    alert('You didn\'t guess a number');
+  } else if(parseInt(theirAns) < myAns) {
+    alert('Guess higher!');
+  } else if (parseInt(theirAns) > myAns) {
+    alert('Guess lower!');
+  } else {
+    alert('Incorrect input! You lost a try!');
+  }
 }
-console.log('User answer: ' + q5 + '\nMy answer: yes/y' + '\nAnswered correctly: ' + ((q5 == 'yes') || (q5 == 'y')));
+
+alert('You got ' + totalCorrect + ' out of 7 questions correct.');
