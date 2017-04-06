@@ -3,11 +3,13 @@
 window.onload = function() { //Load the page before running the JS so it's not a white screen
 
   var theirName = prompt('What\'s your name?');
-
+  var theirAns;
   var totalCorrect = 0;
+
+  function question1Through5() {
   var questionArr = ['Do you think that I like programming?', 'Have I ever been to Mexico?', 'Am I over 6\' tall?', 'Do I know C++ like the back of my hand?', 'Do I own two beagles?'];
   var myAnswerArr = ['yes', 'no', 'no', 'no', 'yes'];
-  var theirAns;
+
 
   for(var questionNumber = 0; questionNumber < questionArr.length; questionNumber++) {
     theirAns = prompt(questionArr[questionNumber]);
@@ -25,6 +27,8 @@ window.onload = function() { //Load the page before running the JS so it's not a
 
     console.log('Question number: ' + (questionNumber + 1) + '\nUser answer: ' + theirAns + '\nMy answer: ' + myAnswerArr[questionNumber] + '/' + myAnswerArr[questionNumber].substring(0,1) + '\nAnswered correctly: ' + (checkForBothAns));
   }
+}
+question1Through5();
 
   var questionsTriesAnswerArr = [['Can you guess the number I\'m thinking of between 0 and 25?', 4, Math.floor(Math.random() * 25)], ['What is one state I have been to besides Washington?', 6, ['oregon', 'california', 'arizona', 'new york']]];
   var running;
@@ -33,7 +37,7 @@ window.onload = function() { //Load the page before running the JS so it's not a
   var myAns;
   var question;
 
-  for(questionNumber = 6; questionNumber < 8; questionNumber++) {
+  for(var questionNumber = 6; questionNumber < 8; questionNumber++) {
     running = true;
     stringOfAttempts = '';
     question = questionsTriesAnswerArr[questionNumber - 6][0];
@@ -57,12 +61,12 @@ window.onload = function() { //Load the page before running the JS so it's not a
       theirAns = parseInt(theirAns);
 
       if(correct) {
-        alert('You guessed it,' theirName + '! It took you ' + (theirTries + 1) + ' tries!');
+        alert('You guessed it,' + theirName + '! It took you ' + (theirTries + 1) + ' tries!');
         console.log(output);
         totalCorrect++;
         running = false;
       } else if(theirTries === allowedTries - 1) {
-        alert('You ran out of tries, 'theirName + '! Too bad.');
+        alert('You ran out of tries, ' + theirName + '! Too bad.');
         console.log(output);
         running = false;
       } else if(theirAns == NaN || theirAns == null || theirAns == undefined) {
