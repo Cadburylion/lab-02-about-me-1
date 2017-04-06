@@ -1,41 +1,82 @@
 'use strict'; /* Do this for every JavaScript file for now on forever! */
 
-var q1 = prompt('Do you think that I like programming?');
-if(q1 == '') { //trim() throws error when the user presses cancel
-  q1 = 'no input supplied';
-} else if(q1 !== null) { //Empty string if they just hit OK
-  q1 = q1.trim().toLowerCase();
-}
-console.log('User answer: ' + q1 + '\nMy answer: yes/n' + '\nAnswered correctly: ' + ((q1 == 'yes') || (q1 == 'y')));
+window.onload = function() { //Load the page before running the JS so it's not a white screen
 
-var q2 = prompt('Have I ever been to Mexico?');
-if(q2 == '') {
-  q2 = 'no input supplied';
-} else if(q2 !== null) {
-  q2 = q2.trim().toLowerCase();
-}
-console.log('User answer: ' + q2 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q2 == 'no') || (q2 == 'n')));
+  var theirName = prompt('What\'s your name?');
 
-var q3 = prompt('Am I over 6\' tall?');
-if(q3 == '') {
-  q3 = 'no input supplied';
-} else if(q3 !== null) {
-  q3 = q3.trim().toLowerCase();
-}
-console.log('User answer: ' + q3 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q3 == 'no') || (q3 == 'n')));
+  var totalCorrect = 0;
+  var questionArr = ['Do you think that I like programming?', 'Have I ever been to Mexico?', 'Am I over 6\' tall?', 'Do I know C++ like the back of my hand?', 'Do I own two beagles?'];
+  var myAnswerArr = ['yes', 'no', 'no', 'no', 'yes'];
+  var theirAns;
 
-var q4 = prompt('Do I know C++ like the back of my hand?');
-if(q4 == '') {
-  q4 = 'no input supplied';
-} else if(q4 !== null) {
-  q4 = q4.trim().toLowerCase();
-}
-console.log('User answer: ' + q4 + '\nMy answer: no/n' + '\nAnswered correctly: ' + ((q4 == 'no') || (q4 == 'n')));
+  for(var questionNumber = 0; questionNumber < questionArr.length; questionNumber++) {
+    theirAns = prompt(questionArr[questionNumber]);
+    if(!theirAns) { //Empty string if they just hit OK
+      theirAns = '[no input supplied]';
+    } else if(theirAns !== null) { //trim() throws error when the user presses cancel
+      theirAns = theirAns.trim().toLowerCase();
+    }
 
-var q5 = prompt('Do I own two beagles?');
-if(q5 == '') {
-  q5 = 'no input supplied';
-} else if(q5 !== null) {
-  q5 = q5.trim().toLowerCase();
+    var checkForBothAns = (theirAns == myAnswerArr[questionNumber]) || (theirAns == myAnswerArr[questionNumber].substring(0,1)); //Checks for yes/no and y/n
+
+    if(checkForBothAns) {
+      totalCorrect++;
+    }
+
+    console.log('Question number: ' + (questionNumber + 1) + '\nUser answer: ' + theirAns + '\nMy answer: ' + myAnswerArr[questionNumber] + '/' + myAnswerArr[questionNumber].substring(0,1) + '\nAnswered correctly: ' + (checkForBothAns));
+  }
+
+  var questionsTriesAnswerArr = [['Can you guess the number I\'m thinking of between 0 and 25?', 4, Math.floor(Math.random() * 25)], ['What is one state I have been to besides Washington?', 6, ['oregon', 'california', 'arizona', 'new york']]];
+  var running;
+  var stringOfAttempts;
+  var allowedTries;
+  var myAns;
+  var question;
+
+  for(questionNumber = 6; questionNumber < 8; questionNumber++) {
+    running = true;
+    stringOfAttempts = '';
+    question = questionsTriesAnswerArr[questionNumber - 6][0];
+    allowedTries = questionsTriesAnswerArr[questionNumber - 6][1];
+    myAns = questionsTriesAnswerArr[questionNumber - 6][2];
+
+    for(var theirTries = 0; theirTries < allowedTries && running; theirTries++) {
+      theirAns = prompt(question);
+      if(!theirAns) {
+        theirAns = '[no input supplied]';
+      } else if(theirAns !== null) {
+        theirAns = theirAns.trim().toLowerCase();
+      }
+
+      var correct = false;
+      if(myAns.toString().includes(theirAns)) {
+        correct = true;
+      }
+      stringOfAttempts += theirAns + ' '; //Gather a long string of all their attempts to print in the console
+      var output = 'Question number: ' + questionNumber + '\nUser answer(s): ' + stringOfAttempts + '\nMy answer: ' + myAns.toString() + '\nAnswered correctly: ' + correct + '\nTotal guesses: ' + (theirTries + 1);
+      theirAns = parseInt(theirAns);
+
+      if(correct) {
+        alert('You guessed it,' theirName + '! It took you ' + (theirTries + 1) + ' tries!');
+        console.log(output);
+        totalCorrect++;
+        running = false;
+      } else if(theirTries === allowedTries - 1) {
+        alert('You ran out of tries, 'theirName + '! Too bad.');
+        console.log(output);
+        running = false;
+      } else if(theirAns == NaN || theirAns == null || theirAns == undefined) {
+        alert('Incorrect input! You lost a try!');
+      } else if(theirAns < myAns) {
+        alert('Guess higher!');
+      } else if (theirAns > myAns) {
+        alert('Guess lower!');
+      } else {
+        alert('Nope, sorry! Try again!');
+      }
+    }
+  }
+
+  console.log(theirName + ' got ' + totalCorrect + ' out of 7 questions correct.');
+  alert('Wow, ' + theirName + ', you got ' + totalCorrect + ' out of 7 questions correct.');
 }
-console.log('User answer: ' + q5 + '\nMy answer: yes/y' + '\nAnswered correctly: ' + ((q5 == 'yes') || (q5 == 'y')));
