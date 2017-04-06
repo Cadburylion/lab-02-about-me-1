@@ -28,7 +28,6 @@ window.onload = function() { //Load the page before running the JS so it's not a
     console.log('Question number: ' + (questionNumber + 1) + '\nUser answer: ' + theirAns + '\nMy answer: ' + myAnswerArr[questionNumber] + '/' + myAnswerArr[questionNumber].substring(0,1) + '\nAnswered correctly: ' + (checkForBothAns));
   }
 }
-question1Through5();
 
   var questionsTriesAnswerArr = [['Can you guess the number I\'m thinking of between 0 and 25?', 4, Math.floor(Math.random() * 25)], ['What is one state I have been to besides Washington?', 6, ['oregon', 'california', 'arizona', 'new york']]];
   var running;
@@ -82,6 +81,8 @@ function question6And7() {
     }
   }
 }
+
+question1Through5();
 question6And7();
 
   console.log(theirName + ' got ' + totalCorrect + ' out of 7 questions correct.');
