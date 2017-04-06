@@ -37,6 +37,7 @@ question1Through5();
   var myAns;
   var question;
 
+function question6And7() {
   for(var questionNumber = 6; questionNumber < 8; questionNumber++) {
     running = true;
     stringOfAttempts = '';
@@ -80,6 +81,8 @@ question1Through5();
       }
     }
   }
+}
+question6And7();
 
   console.log(theirName + ' got ' + totalCorrect + ' out of 7 questions correct.');
   alert('Wow, ' + theirName + ', you got ' + totalCorrect + ' out of 7 questions correct.');
